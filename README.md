@@ -1,6 +1,6 @@
 # lab-07-back-end
 
-**Authors**: Matt Stuhring, Chris 
+**Authors**: Chris Coulon, Matt Stuhring
 
 ## Overview
 Provide the user with weather data for the location they enter.
@@ -21,4 +21,31 @@ Provide the user with weather data for the location they enter.
 
 ## Change log
 - 07-09-2019 - Initial set up, render weather data for location
+- 07-10-2019 - Implemented .map function on weather data
 
+
+## Credits & Collaborations
+Chris Coulon, Matt Stuhring, Padma Ganapathi, Trevor Dobson & Marisha Hoza
+Brandon Hurrington & Joachen Busche
+
+## Features
+Number and name of feature: #1 Data Formatting
+
+Estimate of time needed to complete: 00:40
+
+Start time: 09:46AM
+
+Finish time: _1000_
+
+Actual time needed to complete: _14min_
+
+## Features
+Number and name of feature: #2 Locations
+
+Estimate of time needed to complete: 00:40
+
+Start time: 1001AM
+
+Finish time: __
+
+Actual time needed to complete: __

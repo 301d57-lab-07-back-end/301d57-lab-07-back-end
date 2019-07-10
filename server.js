@@ -6,6 +6,7 @@ require('dotenv').config();
 // NPM Packages
 const express = require('express');
 const cors = require('cors');
+const superagent = require('superagent');
 
 // Global Variables
 const PORT = process.env.PORT;
@@ -19,12 +20,7 @@ app.use(express.static('public'));
 // GET - user location input, display on map
 // ---------------------------------------------
 app.get('/location', (request, response) => {
-  try {
-    const loc = returnLocation(request.query.data);
-    response.status(200).send(loc);
-  } catch (err) {
-    response.status(500).send('Sorry, something went wrong.');
-  }
+  returnLocation(request.query.data, response);
 });
 
 // GET - daily weather details from location
@@ -44,44 +40,52 @@ app.use('*', (request, response) => {
   response.status(404).send('Sorry, page not found');
 });
 
+// Location Constructor
+function Location(search_query, formatted_query, latitude, longitude) {
+  this.search_query = search_query;
+  this.formatted_query = formatted_query;
+  this.latitude = latitude;
+  this.longitude = longitude;
+}
+
 // Location - get Geo JSON, create object via constructor, return object
 // -----------------------------------------------------------------------
-const returnLocation = (locationName) => {
-  const locationData = require('./data/geo.json');
 
-  function Location(search_query, formatted_query, latitude, longitude) {
-    this.search_query = search_query;
-    this.formatted_query = formatted_query;
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
+const returnLocation = (locationName, response) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${locationName}&key=${process.env.GEOCODE_API_KEY}`
+  superagent
+    .get(url)
+    .then(result => {
+      console.log(result.body.results[0].geometry.location.lat);
+      const lat = result.body.results[0].geometry.location.lat;
+      const lng = result.body.results[0].geometry.location.lng;
+      const formatted_query = result.body.results[0].formatted_address;
+      const search_query = locationName;
+    
+      response.status(200).send(new Location(search_query, formatted_query, lat, lng));
+    })
+    .catch(err => {
+      console.error(err);
+      response.status(500).send('Sorry, something went wrong.')
+    });
 
-  const search_query = locationName;
-  const formatted_query = locationData.results[0].formatted_address;
-  const latitude = locationData.results[0].geometry.location.lat;
-  const longitude = locationData.results[0].geometry.location.lng;
-
-  return new Location(search_query, formatted_query, latitude, longitude);
 };
 
 // Weather - get Darksky JSON, create object via constructor, return object
 // -------------------------------------------------------------------------
 const returnWeather = (location) => {
   const weatherData = require('./data/darksky.json');
-  let weatherArray = [];
 
   function Weather(forecast, time) {
     this.forecast = forecast;
     this.time = time;
   }
 
-  for (let i = 0; i < weatherData.daily.data.length; i++) {
-    let forecast = weatherData.daily.data[i].summary;
-    let time = new Date(weatherData.daily.data[i].time * 1000);
-    weatherArray.push(new Weather(forecast, time.toDateString()));
-  }
-
-  return weatherArray;
+  return weatherData.daily.data.map(obj => {
+    let forecast = obj.summary;
+    let time = new Date(obj.time * 1000).toDateString();
+    return new Weather(forecast, time);
+  });
 };
 
 // Start the server!!!
