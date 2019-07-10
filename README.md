@@ -22,30 +22,55 @@ Provide the user with weather data for the location they enter.
 ## Change log
 - 07-09-2019 - Initial set up, render weather data for location
 - 07-10-2019 - Implemented .map function on weather data
-
+- 07-10-2019 - Implemented superagent, requested geocoding API, reformatted returnLocation function
+- 07-10-2019 - Reformatted returnWeather function to use DarkSky API and display on our frontend
 
 ## Credits & Collaborations
 Chris Coulon, Matt Stuhring, Padma Ganapathi, Trevor Dobson & Marisha Hoza
 Brandon Hurrington & Joachen Busche
 
 ## Features
+
+### 1 Data Formatting
 Number and name of feature: #1 Data Formatting
 
 Estimate of time needed to complete: 00:40
 
 Start time: 09:46AM
 
-Finish time: _1000_
+Finish time: 10:00AM
 
-Actual time needed to complete: _14min_
+Actual time needed to complete: 00:14
 
-## Features
+### 2 Locations
 Number and name of feature: #2 Locations
 
 Estimate of time needed to complete: 00:40
 
-Start time: 1001AM
+Start time: 10:01AM
 
-Finish time: __
+Finish time: 10:51AM
 
-Actual time needed to complete: __
+Actual time needed to complete: 00:50
+
+### 3 Weather
+Number and name of feature: #3 Weather
+
+Estimate of time needed to complete: 00:51
+
+Start time: 10:54AM
+
+Finish time: 11:40AM
+
+Actual time needed to complete: 48min
+
+### 4 EventBrite
+Number and name of feature: #4 EventBrite
+
+Estimate of time needed to complete: 00:45
+
+Start time: 11:42AM
+
+Finish time: AM
+
+Actual time needed to complete: min
