@@ -24,6 +24,7 @@ Provide the user with weather data for the location they enter.
 - 07-10-2019 - Implemented .map function on weather data
 - 07-10-2019 - Implemented superagent, requested geocoding API, reformatted returnLocation function
 - 07-10-2019 - Reformatted returnWeather function to use DarkSky API and display on our frontend
+- 07-10-2019 - Included events api from EventBrite
 
 ## Credits & Collaborations
 Chris Coulon, Matt Stuhring, Padma Ganapathi, Trevor Dobson & Marisha Hoza
@@ -71,6 +72,6 @@ Estimate of time needed to complete: 00:45
 
 Start time: 11:42AM
 
-Finish time: AM
+Finish time: 12:22PM
 
-Actual time needed to complete: min
+Actual time needed to complete: 40min
